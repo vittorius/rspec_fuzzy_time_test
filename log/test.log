@@ -1,0 +1,31 @@
+  [1m[36m (27.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (87.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20150416194352)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (52.6ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150416194352"]]
+  [1m[36m (22.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddConfirmationDateToUsers (20150416195226)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_date" timestamp[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150416195226"]]
+  [1m[36m (15.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL
+  [1m[36m (1.4ms)[0m  [1mselect table_name from information_schema.views where table_schema = 'rspec_fuzzy_time_test_test'[0m
+  [1m[35m (111.6ms)[0m  TRUNCATE TABLE "users" RESTART IDENTITY CASCADE;
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_2
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("confirmation_date", "created_at", "name", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["confirmation_date", "2015-04-16 19:55:27.579258"], ["created_at", "2015-04-16 19:55:27.612204"], ["name", "dummy"], ["updated_at", "2015-04-16 19:55:27.612204"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_2
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
